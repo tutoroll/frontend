@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { registerUser } from "./registerApi";
 import { useRouter } from "next/navigation";
+import { registerUser } from "../api/registerApi";
 
 export const useRegister = () => {
   const router = useRouter();

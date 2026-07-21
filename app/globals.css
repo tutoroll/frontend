@@ -1,26 +1,84 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* -----------COLORS----------- */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* Remove defaults */
+  --color-*: initial;
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Base colors */
+  --color-base-0: #FFFFFF;
+  --color-base-25: #F5F5F5;
+  --color-base-50: #EAEAEA;
+  --color-base-100: #D1D1D1;
+  --color-base-200: #B0B0B0;
+  --color-base-300: #888888;
+  --color-base-400: #6D6D6D;
+  --color-base-500: #5D5D5D;
+  --color-base-600: #4F4F4F;
+  --color-base-700: #454545;
+  --color-base-5800: #383838;
+  --color-base-900: #212121;
+
+  /* Blue colors */
+  --color-blue-10: #FDFCFF;
+  --color-blue-15: #FAF9FF;
+  --color-blue-25: #F5F2FF;
+  --color-blue-50: #EBE6FF;
+  --color-blue-100: #D7CCFF;
+  --color-blue-200: #B099FF;
+  --color-blue-300: #8866FF;
+  --color-blue-400: #6133FF;
+  --color-blue-500: #3900FF;
+  --color-blue-600: #2E00CC;
+  --color-blue-700: #220099;
+  --color-blue-800: #170066;
+  --color-blue-900: #0B0033;
+
+  /* Green colors */
+  --color-green-100: #D8F6D4;
+  --color-green-200: #B1EEA9;
+  --color-green-300: #8BE57E;
+  --color-green-400: #64DD53;
+  --color-green-500: #3DD428;
+  --color-green-600: #31AA20;
+  --color-green-700: #257F18;
+  --color-green-800: #185510;
+  --color-green-900: #0C2A08;
+
+  /* Yellow colors */
+  --color-yellow-100: #FFFAD4;
+  --color-yellow-200: #FFF5AA;
+  --color-yellow-300: #FFF17F;
+  --color-yellow-400: #FFEC55;
+  --color-yellow-500: #FFE72A;
+  --color-yellow-600: #CCB922;
+  --color-yellow-700: #998B19;
+  --color-yellow-800: #665C11;
+  --color-yellow-900: #332E08;
+
+  /* Red colors */
+  --color-red-100: #FFCCCC;
+  --color-red-200: #FF9999;
+  --color-red-300: #FF6666;
+  --color-red-400: #FF3333;
+  --color-red-500: #FF0000;
+  --color-red-600: #CC0000;
+  --color-red-700: #990000;
+  --color-red-800: #660000;
+  --color-red-900: #330000;
+
+  /* -----------FONTS----------- */
+
+  /* Family */
+  --font-sans: var(--font-roboto);
+
+  /* Sizes */
+  --text-h3: 3rem;
+  --text-h4: 13.333rem;
+  --text-h5: 2rem;
+  --text-body-l: 1.5 rem;
+  --text-body-m: 1.25rem;
+  --text-body-s: 1rem;
+  --text-caption: 0.75rem;
 }

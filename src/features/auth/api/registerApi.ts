@@ -1,5 +1,5 @@
 import { client } from "@/src/shared/api/client";
-import { RegisterRequestForm, RegisterResponse } from "./models";
+import { RegisterRequestForm, RegisterResponse } from "../models/auth_forms";
 
 export const registerUser = async (
   form: RegisterRequestForm,

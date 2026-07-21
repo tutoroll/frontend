@@ -1,18 +1,19 @@
 "use client";
 
-import { parseUserRole } from "@/src/features/register/api/types";
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { useRegister } from "../api/useRegister";
-import { RegisterRequestForm } from "../api/models";
+import { useLogin } from "../hooks/useLogin";
+import { UserLoginForm } from "../models/auth_forms";
+import { useSearchParams } from "next/navigation";
+import { parseUserRole } from "../models/user_types";
 
-export const RegisterForm: React.FC = () => {
+export const LoginForm = () => {
   const [hidden, setHidden] = useState(true);
-  const searchParams = useSearchParams();
 
-  const [form, setForm] = useState<RegisterRequestForm>({
-    name: "",
-    surname: "",
+  const searchParams = useSearchParams();
+  const roleStr = searchParams.get("role");
+  const userRole = parseUserRole(roleStr);
+
+  const [form, setForm] = useState<UserLoginForm>({
     email: "",
     password: "",
   });
@@ -21,11 +22,17 @@ export const RegisterForm: React.FC = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Use the .get() method to read specific keys
-  const roleStr = searchParams.get("role");
-  const userRole = parseUserRole(roleStr);
+  const m = useLogin();
 
-  const { mutate, isPending } = useRegister();
+  const handleSubmit = () => {
+    if (m.isPending) return;
+    m.mutate(
+      { ...form, role: userRole! },
+      {
+        onError: () => setForm({ email: "", password: "" }),
+      },
+    );
+  };
 
   if (userRole === null) {
     return (
@@ -36,24 +43,9 @@ export const RegisterForm: React.FC = () => {
   }
 
   return (
-    <main className="flex w-screen h-screen justify-center items-center bg-blue-50/50">
-      <div className="flex w-3/10 flex-col bg-white shadow-2xl border border-blue-200 rounded-2xl p-8 gap-4">
-        <input
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          type="text"
-          placeholder="Имя"
-          className="w-full px-4 py-3 text-gray-700 bg-white border border-gray-200 rounded-xl shadow-sm focus:shadow-md focus:shadow-blue-500/10 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-200"
-        />
-        <input
-          name="surname"
-          value={form.surname}
-          onChange={handleChange}
-          type="text"
-          placeholder="Фамилия"
-          className="w-full px-4 py-3 text-gray-700 bg-white border border-gray-200 rounded-xl shadow-sm focus:shadow-md focus:shadow-blue-500/10 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-200"
-        />
+    <main className="flex w-screen h-screen justify-center items-center bg-blue-50/50 colo">
+      <div className="flex w-6/10 flex-col bg-white shadow-2xl border border-blue-200 rounded-2xl p-4 gap-4">
+        <span className="inline-block font-bold">Вход в аккаунт</span>
         <input
           name="email"
           value={form.email}
@@ -117,13 +109,14 @@ export const RegisterForm: React.FC = () => {
           </button>
         </div>
         <button
-          onClick={() => (isPending ? null : mutate(form))}
+          onClick={handleSubmit}
           className="flex w-full h-20 bg-blue-100 rounded-2xl justify-center items-center hover:bg-blue-200 cursor-pointer"
         >
           <p className="text-blue-600 text-xl font-bold">
-            {isPending ? "Загрузка..." : "Зарегистрироваться"}
+            {m.isPending ? "Загрузка..." : "Войти"}
           </p>
         </button>
+        {m.isError && <p className="text-red-500 text-sm">{m.error.message}</p>}
       </div>
     </main>
   );

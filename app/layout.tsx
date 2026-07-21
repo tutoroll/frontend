@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { QueryProvider } from "@/src/shared/providers/QueryProvider";
+import { Roboto } from "next/font/google";
 import "./globals.css";
+import { QueryProvider } from "@/src/app/providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const robotoSans = Roboto({
+  variable: "--font-roboto",
+  weight: ["400", "500"],
+  subsets: ["latin", "cyrillic"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -26,9 +23,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${robotoSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-sans">
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>

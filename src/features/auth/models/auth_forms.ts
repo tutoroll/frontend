@@ -1,3 +1,14 @@
+import { UserRole } from "./user_types";
+
+export interface UserLoginForm {
+  email: string;
+  password: string;
+}
+
+export interface UserLoginRequest extends UserLoginForm {
+  role: UserRole;
+}
+
 export interface RegisterRequestForm {
   name: string;
   surname: string;
