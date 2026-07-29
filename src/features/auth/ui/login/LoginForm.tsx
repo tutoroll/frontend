@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useLogin } from "../hooks/useLogin";
-import { UserLoginForm } from "../models/auth_forms";
+import { useLogin } from "../../hooks/useLogin";
+import { UserLoginForm } from "../../models/auth_forms";
 import { useSearchParams } from "next/navigation";
-import { parseUserRole } from "../models/user_types";
+import { parseUserRole } from "../../models/user_types";
 
 export const LoginForm = () => {
   const [hidden, setHidden] = useState(true);

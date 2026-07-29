@@ -1,6 +1,8 @@
 "use client";
 
 import { UserRole } from "@/src/features/auth/models/user_types";
+import { Button } from "@/src/shared/ui/button/Button";
+import { ButtonType } from "@/src/shared/ui/button/properties";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -10,7 +12,7 @@ export default function AuthPage() {
 
   return (
     <main className="flex w-screen h-screen justify-center items-center bg-blue-15">
-      <div className="w-450/1512 flex flex-col bg-base-0 shadow-2xl rounded-2xl p-6 gap-4">
+      <div className="w-450/1512 flex flex-col bg-base-0 shadow-card rounded-2xl p-6 gap-4">
         <UserRoleComponent
           role={UserRole.student}
           selectedRole={role}
@@ -22,20 +24,15 @@ export default function AuthPage() {
           selectCurrentRole={setRole}
         />
         <div className="flex flex-col gap-2">
-          <button
+          <Button
+            title="Войти"
             onClick={() => router.replace(`/login?role=${role}`)}
-            className="flex w-full h-15 bg-blue-400 rounded-lg justify-center items-center hover:bg-blue-500 cursor-pointer"
-          >
-            <p className="text-base-0 text-body-m font-medium">Войти</p>
-          </button>
-          <button
+          />
+          <Button
+            title="Зарегистрироваться"
+            type={ButtonType.secondary}
             onClick={() => router.push(`/register?role=${role}`)}
-            className="flex w-full h-15 bg-blue-50 rounded-lg justify-center items-center hover:bg-blue-100 cursor-pointer"
-          >
-            <p className="text-blue-400  text-body-m font-medium">
-              Зарегистрироваться
-            </p>
-          </button>
+          />
         </div>
       </div>
     </main>

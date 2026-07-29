@@ -9,12 +9,26 @@ export interface UserLoginRequest extends UserLoginForm {
   role: UserRole;
 }
 
-export interface RegisterRequestForm {
+/** То, что пользователь вводит в UI */
+export interface RegisterFormValues {
   name: string;
   surname: string;
   email: string;
   password: string;
 }
+
+/** То, что уходит на бэк */
+export interface RegisterRequest {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  role: UserRole;
+}
+
+export type RegisterFormErrors = Partial<
+  Record<keyof RegisterFormValues, string>
+>;
 
 export interface RegisterResponse {
   id: number;
