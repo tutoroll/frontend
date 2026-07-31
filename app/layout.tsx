@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${robotoSans.variable} antialiased`}>
-      <body className="bg-blue-15 font-sans">
+      <body className="font-sans">
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
