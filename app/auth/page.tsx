@@ -1,6 +1,7 @@
 "use client";
 
 import { UserRole } from "@/src/features/auth/models/user_types";
+import { AuthCard } from "@/src/features/auth/ui/AuthCard";
 import { Button } from "@/src/shared/ui/button/Button";
 import { ButtonType } from "@/src/shared/ui/button/properties";
 import { useRouter } from "next/navigation";
@@ -11,8 +12,8 @@ export default function AuthPage() {
   const [role, setRole] = useState(UserRole.student);
 
   return (
-    <main className="flex w-screen h-screen justify-center items-center bg-blue-15">
-      <div className="w-450/1512 flex flex-col bg-base-0 shadow-card rounded-2xl p-6 gap-4">
+    <main className="flex w-screen h-screen justify-center items-center">
+      <AuthCard>
         <UserRoleComponent
           role={UserRole.student}
           selectedRole={role}
@@ -34,7 +35,7 @@ export default function AuthPage() {
             onClick={() => router.push(`/register?role=${role}`)}
           />
         </div>
-      </div>
+      </AuthCard>
     </main>
   );
 }

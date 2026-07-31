@@ -1,13 +1,15 @@
 import { UserRole } from "./user_types";
 
-export interface UserLoginForm {
+/** То, что пользователь вводит в UI */
+export interface LoginFormValues {
   email: string;
   password: string;
 }
 
-export interface UserLoginRequest extends UserLoginForm {
+/** То, что уходит на бэк */
+export type UserLoginRequest = LoginFormValues & {
   role: UserRole;
-}
+};
 
 /** То, что пользователь вводит в UI */
 export interface RegisterFormValues {
@@ -18,17 +20,15 @@ export interface RegisterFormValues {
 }
 
 /** То, что уходит на бэк */
-export interface RegisterRequest {
-  name: string;
-  surname: string;
-  email: string;
-  password: string;
+export type RegisterRequest = RegisterFormValues & {
   role: UserRole;
-}
+};
 
 export type RegisterFormErrors = Partial<
   Record<keyof RegisterFormValues, string>
 >;
+
+export type LoginFormErrors = Partial<Record<keyof LoginFormValues, string>>;
 
 export interface RegisterResponse {
   id: number;

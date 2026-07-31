@@ -21,11 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${robotoSans.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col font-sans">
+    <html lang="en" className={`${robotoSans.variable} antialiased`}>
+      <body className="bg-blue-15 font-sans">
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>

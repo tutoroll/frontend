@@ -11,12 +11,9 @@ import { Button } from "@/src/shared/ui/button/Button";
 import { ButtonState, ButtonType } from "@/src/shared/ui/button/properties";
 import { Input } from "@/src/shared/ui/input/Input";
 import { InputSize } from "@/src/shared/ui/input/properties";
-import {
-  hasRegisterErrors,
-  validateRegisterForm,
-} from "../../models/register_validation";
 import { AvatarPicker } from "./AvatarPicker";
 import { PasswordInput } from "../PasswordInput";
+import { hasErrors, validateRegisterForm } from "../../models/validation";
 
 type RegisterFieldType = keyof RegisterFormValues;
 
@@ -47,7 +44,7 @@ export const RegisterForm = ({ role }: RegisterFormProps) => {
     e.preventDefault();
     if (isPending) return;
     const errors = validateRegisterForm(form);
-    const hasAny = hasRegisterErrors(errors);
+    const hasAny = hasErrors(errors);
     if (hasAny) {
       setErrors(errors);
       return;

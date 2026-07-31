@@ -1,6 +1,6 @@
-import axios, { CreateAxiosDefaults } from "axios";
+import axios from "axios";
 
-const config: CreateAxiosDefaults = {
+const config = {
   baseURL: "http://localhost:8000",
   timeout: 3000,
   withCredentials: true,
