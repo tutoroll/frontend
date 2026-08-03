@@ -29,11 +29,3 @@ export type RegisterFormErrors = Partial<
 >;
 
 export type LoginFormErrors = Partial<Record<keyof LoginFormValues, string>>;
-
-export interface RegisterResponse {
-  id: number;
-  name: string;
-  surname: string;
-  email: string;
-  created_at: string;
-}

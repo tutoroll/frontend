@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { QueryProvider } from "@/src/app/providers";
+import { MSWProvider, QueryProvider } from "@/src/app/providers";
 
 const robotoSans = Roboto({
   variable: "--font-roboto",
@@ -23,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${robotoSans.variable} antialiased`}>
       <body className="font-sans">
-        <QueryProvider>{children}</QueryProvider>
+        <MSWProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </MSWProvider>
       </body>
     </html>
   );
