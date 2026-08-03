@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { RootMenuItem } from "./MenuItem";
+import { UserMenuItem } from "./UserMenuItem";
 
 export type Page = "profile" | "search" | "tasks" | "subjects" | "settings";
 
@@ -12,8 +13,9 @@ export const RootPageShell = ({
 }) => {
   return (
     <main className="h-screen w-screen flex bg-blue-25">
-      <div className="flex flex-col py-6 px-4 w-260/1512 items-start">
-        <div className="flex-1 flex flex-col items-start gap-4">
+      <div className="flex flex-col py-6 px-4 w-260/1512">
+        <div className="flex-1 flex flex-col items-stretch gap-4">
+          <UserMenuItem selected={page==='profile'}/>
           <RootMenuItem
             icon={
               <svg

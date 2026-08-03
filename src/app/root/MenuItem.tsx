@@ -16,7 +16,7 @@ export const RootMenuItem = ({
 }: RootMenuItemProps) => {
   return (
     <Link
-      className={`flex ${selected ? "text-blue-400" : "text-base-500 hover:text-base-700"} text-body-s font-medium gap-2 hover:scale-105 transition-all duration-200 items-center justify-center`}
+      className={`flex ${selected ? "text-blue-400" : "text-base-500 hover:text-base-700"} text-body-s font-medium gap-2 hover:scale-105 transition-all duration-200`}
       href={link}
     >
       {icon}
