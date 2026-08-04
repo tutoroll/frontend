@@ -1,7 +1,7 @@
 "use client";
 
-import { UserRole } from "@/src/features/auth/models/user_types";
 import { AuthCard } from "@/src/features/auth/ui/AuthCard";
+import { UserRole } from "@/src/shared/models/user";
 import { Button } from "@/src/shared/ui/button/Button";
 import { ButtonType } from "@/src/shared/ui/button/properties";
 import { useRouter } from "next/navigation";
@@ -9,18 +9,18 @@ import { useState } from "react";
 
 export default function AuthPage() {
   const router = useRouter();
-  const [role, setRole] = useState(UserRole.student);
+  const [role, setRole] = useState<UserRole>("student");
 
   return (
     <main className="flex w-screen h-screen justify-center items-center">
       <AuthCard>
         <UserRoleComponent
-          role={UserRole.student}
+          role={"student"}
           selectedRole={role}
           selectCurrentRole={setRole}
         />
         <UserRoleComponent
-          role={UserRole.tutor}
+          role={"tutor"}
           selectedRole={role}
           selectCurrentRole={setRole}
         />
@@ -49,9 +49,9 @@ interface UserRoleComponentProps {
 function UserRoleComponent(props: UserRoleComponentProps) {
   const role = props.role;
   const selected = role === props.selectedRole;
-  const roleTitle = role == UserRole.student ? "Студент" : "Преподаватель";
+  const roleTitle = role === "student" ? "Студент" : "Преподаватель";
   const searching =
-    role == UserRole.student ? "Я ищу преподавателя" : "Я ищу учеников";
+    role === "student" ? "Я ищу преподавателя" : "Я ищу учеников";
 
   return (
     <div

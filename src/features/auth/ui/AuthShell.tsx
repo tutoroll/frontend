@@ -1,8 +1,8 @@
 "use client";
 
+import { UserRole } from "@/src/shared/models/user";
 import { useSearchParams } from "next/navigation";
 import { ReactNode } from "react";
-import { parseUserRole, UserRole } from "../models/user_types";
 
 export const AuthPageShell = ({
   children,
@@ -10,9 +10,13 @@ export const AuthPageShell = ({
   children: (role: UserRole) => ReactNode;
 }) => {
   const roleStr = useSearchParams().get("role");
-  const role = parseUserRole(roleStr);
+  const role = ((): UserRole | undefined => {
+    if (roleStr === "student" || roleStr === "tutor") {
+      return roleStr;
+    }
+  })();
 
-  if (role === null) {
+  if (role === undefined) {
     return (
       <main className="flex w-screen h-screen items-center justify-center">
         {roleStr} не является корректным role
