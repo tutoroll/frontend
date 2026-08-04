@@ -1,9 +1,13 @@
-import { UserResponse } from "@/src/shared/models/user";
+import { UserResponse } from "@/src/features/user/api/dto";
 import { faker } from "@faker-js/faker";
-import { delay, http, HttpResponse } from "msw";
+import { delay, http, HttpResponse, passthrough } from "msw";
 
 export const userHandlers = [
-  http.get("*/user/me", async () => {
+  http.get("*/user/me", async (info) => {
+    if (info.request.headers.get("RSC")) {
+      return passthrough();
+    }
+
     await delay();
     const user: UserResponse = {
       id: 123,

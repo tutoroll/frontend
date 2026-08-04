@@ -1,10 +1,29 @@
 "use client";
 
+import { useCurrentUser } from "@/src/features/user/hooks/useCurrentUser";
+import { UserAvatar } from "@/src/shared/ui/UserAvatar";
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const UserMenuItem = ({ selected }: { selected: boolean }) => {
   const [hidden, setHidden] = useState(true);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onPointerDown = (e: PointerEvent) => {
+      if (
+        hidden ||
+        (e.target instanceof Node && overlayRef.current?.contains(e.target))
+      ) {
+        return;
+      }
+      setHidden(true);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [hidden]);
+
+  const { data } = useCurrentUser();
 
   return (
     <div className="relative">
@@ -12,12 +31,17 @@ export const UserMenuItem = ({ selected }: { selected: boolean }) => {
         onClick={() => {
           setHidden((prev) => !prev);
         }}
-        className={`border rounded-2xl ${selected ? "border-blue-300" : "border-base-100"} p-2 hover:scale-105 transition-all duration-200 cursor-pointer`}
+        className={`flex border rounded-2xl ${selected ? "border-blue-300" : "border-base-100"} p-2 gap-3 hover:scale-105 transition-all duration-200 cursor-pointer`}
       >
-        <p className="text-base-800 text-body-m font-medium">Селезнев Максим</p>
+        <UserAvatar url={data?.avatarUrl} size={50} />
+        <p className="text-base-800 text-body-m font-medium">
+          {data?.surname} {data?.name}
+        </p>
       </div>
       <div
-        className={`w-4/5 absolute flex-col gap-2 bg-base-0 shadow-card p-2 rounded-2xl top-full mt-3 left-0 ${hidden ? "hidden" : ""}`}
+        ref={overlayRef}
+        onClick={() => setHidden(true)}
+        className={`absolute  flex-col gap-2 bg-base-0 shadow-card p-2 rounded-2xl top-full mt-3 left-0 right-0 ${hidden ? "hidden" : ""}`}
       >
         <ProfilePopupMenuItem />
         <ExitPopupMenuItem />
@@ -29,7 +53,7 @@ export const UserMenuItem = ({ selected }: { selected: boolean }) => {
 const ProfilePopupMenuItem = () => {
   return (
     <Link
-      href={"/profile"}
+      href={"/user/me"}
       className="flex text-body-s text-base-700 rounded-lg hover:bg-base-25 p-2 gap-2 items-center"
     >
       <svg

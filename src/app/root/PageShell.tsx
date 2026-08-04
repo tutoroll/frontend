@@ -9,13 +9,13 @@ export const RootPageShell = ({
   page,
 }: {
   children: ReactNode;
-  page: Page;
+  page: Page | undefined;
 }) => {
   return (
     <main className="h-screen w-screen flex bg-blue-25">
       <div className="flex flex-col py-6 px-4 w-260/1512">
         <div className="flex-1 flex flex-col items-stretch gap-4">
-          <UserMenuItem selected={page==='profile'}/>
+          <UserMenuItem selected={page === "profile"} />
           <RootMenuItem
             icon={
               <svg
@@ -48,7 +48,7 @@ export const RootPageShell = ({
               </svg>
             }
             title="Поиск"
-            link="search"
+            link="/search"
             selected={page === "search"}
           />
           <RootMenuItem
@@ -83,7 +83,7 @@ export const RootPageShell = ({
               </svg>
             }
             title="Домашние задания"
-            link="tasks"
+            link="/tasks"
             selected={page === "tasks"}
           />
           <RootMenuItem
@@ -112,7 +112,7 @@ export const RootPageShell = ({
               </svg>
             }
             title="Предметы"
-            link="subjects"
+            link="/subjects"
             selected={page === "subjects"}
           />
         </div>
@@ -140,7 +140,7 @@ export const RootPageShell = ({
             </svg>
           }
           title="Настройки"
-          link="settings"
+          link="/settings"
           selected={page === "settings"}
         />
       </div>

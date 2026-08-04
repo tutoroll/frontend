@@ -1,8 +1,8 @@
-export interface UserResponse {
+export interface UserModel {
   id: number;
   name: string;
   surname: string;
   email: string;
-  created_at: string;
-  avatar_key?: string;
+  createdAt: string;
+  avatarUrl: string | null | undefined;
 }

@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Button } from "@/src/shared/ui/button/Button";
 import { ButtonType, ButtonSize } from "@/src/shared/ui/button/properties";
-import { UserAvatarStockIcon } from "@/src/shared/ui/icons/UserAvatarStock";
 import { useState, useEffect, useRef } from "react";
+import { UserAvatar } from "@/src/shared/ui/UserAvatar";
 
 interface AvatarPickerProps {
   onSelected?: (data: UserAvatarData) => void;
@@ -34,16 +33,7 @@ export const AvatarPicker = ({
 
   return (
     <div className="flex flex-col gap-1">
-      {avatar ? (
-        <div
-          className="relative overflow-clip rounded-full"
-          style={{ width: avatarSize, height: avatarSize }}
-        >
-          <Image src={avatar.url} alt="Аватар" fill className="object-cover" />
-        </div>
-      ) : (
-        <UserAvatarStockIcon size={avatarSize} />
-      )}
+      <UserAvatar size={avatarSize} url={avatar?.url} />
       <Button
         onClick={() => inputRef.current?.click()}
         title="Выбрать фото"
